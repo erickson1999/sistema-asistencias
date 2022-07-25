@@ -2,14 +2,13 @@ import { AdminDashboardView } from '../../components/Views/Dashboard/AdminDashbo
 import { AssitantDashboardView } from '../../components/Views/Dashboard/AssitantDashboardView'
 import { PracticingDashboardView } from '../../components/Views/Dashboard/PracticingDashboardView'
 import { useProtectedRouteByToken } from '../../hooks/useProtectedRouteByToken'
-
 const DashBoardPage = () => {
-  const { role } = useProtectedRouteByToken()
+  const { role, user } = useProtectedRouteByToken()
   return (
     <>
       {role === 'none' && <></>}
       {role === 'practicing' && (
-        <PracticingDashboardView> </PracticingDashboardView>
+        <PracticingDashboardView userData={user}> </PracticingDashboardView>
       )}
       {role === 'assistant' && <AssitantDashboardView> </AssitantDashboardView>}
       {role === 'admin' && <AdminDashboardView></AdminDashboardView>}

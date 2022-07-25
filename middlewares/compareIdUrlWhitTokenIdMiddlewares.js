@@ -7,7 +7,6 @@ export const compareIdUrlWithTokenIdMiddlewares = async (req, idOfUrl) => {
   try {
     const decoded = jwt.verify(token, SECRET_KEY)
     const idOfToken = decoded.id
-    console.log(idOfToken === idOfUrl)
     if (idOfToken === idOfUrl) return true
     return false
   } catch (error) {

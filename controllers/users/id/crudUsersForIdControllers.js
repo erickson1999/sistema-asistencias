@@ -10,17 +10,6 @@ export const crudUsersForIdControllers = async (
   userId,
   req
 ) => {
-  try {
-    await dbConnect()
-  } catch (error) {
-    return {
-      status: 500,
-      dataRes: {
-        msg: '¡Upss! parece que ocurrio un error intentalo más tarde',
-        ok: false
-      }
-    }
-  }
   const queries = req.query
   //middlewares
   const verifyAdminRole = await verifyAdminRoleMiddlewares(tokenId)

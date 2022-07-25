@@ -14,7 +14,7 @@ export const useReturnRoute = (redirectTo = '/login') => {
       }
     } else {
       axios
-        .get(`http://localhost:3000/api/token/${token}`)
+        .get(`/api/token/${token}`)
         .then((res) => {
           if (res.data.msg) {
             router.push('/dashboard')

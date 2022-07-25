@@ -1,6 +1,15 @@
 import { decodedToken } from '../../../utils/decodedToken'
 import { crudShiftsAllControllers } from '../../../controllers/shifts/all/crudShiftsAllControllers'
+import dbConnect from '../../../libs/dbConnectLibs'
 const handler = async (req, res) => {
+  try {
+    await dbConnect()
+  } catch (error) {
+    return res.status(500).json({
+      msg: '¡Upss! parece que ocurrio un error intentalo más tarde',
+      ok: false
+    })
+  }
   const { method } = req
 
   const decodedUserToken = await decodedToken(req)

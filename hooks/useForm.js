@@ -29,7 +29,6 @@ const useForm = (initForm, validations = null, execute) => {
       axios
         .get(genUrlForConsult(e.target.value))
         .then((res) => {
-          console.log({ form });
           setForm({
             ...form,
             n_document: e.target.value,
@@ -57,7 +56,6 @@ const useForm = (initForm, validations = null, execute) => {
     const { name, value } = e.target;
 
     if (e.target.name === "role") {
-      console.log({ ...form, [name]: [value] });
       setForm({ ...form, [name]: [value] });
     }
 

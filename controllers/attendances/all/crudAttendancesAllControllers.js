@@ -1,11 +1,8 @@
-import dbConnect from '../../../libs/dbConnectLibs'
 import { get } from './methods/get'
 import { verifyAdminRoleMiddlewares } from '../../../middlewares/verifyAdminRoleMiddlewares'
 import { verifyAssistantRoleMiddlewares } from '../../../middlewares/verifyAssitantRoleMiddlewares'
 export const crudAttendancesAllControllers = async (method, tokenId, req) => {
   try {
-    await dbConnect()
-
     // queries
     const queries = req.query
     // middlewares

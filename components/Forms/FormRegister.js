@@ -22,7 +22,7 @@ export const FormRegister = () => {
 
   function execute(form) {
     axios
-      .post('http://localhost:3000/api/auth/register', form, {
+      .post('/api/auth/register', form, {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -47,17 +47,22 @@ export const FormRegister = () => {
       .catch(function (error) {
         setErrorApi(error.response.data.msg)
       })
-      .then(function () {})
   }
 
   return (
     <Flex width={'100%'} height="100%" justify="center" align="center">
       <form
         onSubmit={handlerSubmit}
-        style={{ display: 'flex', width: '50%', flexDirection: 'column' }}
+        style={{ display: 'flex', width: '100%', flexDirection: 'column' }}
       >
-        <Flex w="full" columnGap={'20px'}>
-          <Box w={'50%'}>
+        <Flex
+          direction={{ base: 'column', md: 'row' }}
+          w={'full'}
+          columnGap={'20px'}
+          justify={'center'}
+          align={'center'}
+        >
+          <Box w={{ base: '80%', md: '25%' }}>
             <FormControl mb={3}>
               <FormLabel htmlFor="n_document" mb={0}>
                 Nº documento
@@ -139,7 +144,7 @@ export const FormRegister = () => {
             </FormControl>
           </Box>
 
-          <Box w={'50%'}>
+          <Box w={{ base: '80%', md: '25%' }}>
             <FormControl mb={3}>
               <FormLabel htmlFor="origin_institution" mb={0}>
                 Institución de origen
@@ -216,16 +221,23 @@ export const FormRegister = () => {
         </Flex>
 
         {router.route === '/practitioners/register' && (
-          <>
-            <FormLabel>Rol</FormLabel>
-            <Select name="role" value={form.role} onChange={handlerChange}>
-              <option defaultChecked value="practicing">
-                practicante
-              </option>
-              <option value="assistant">asistente</option>
-              <option value="admin">administrador</option>
-            </Select>
-          </>
+          <Flex
+            w={'full'}
+            direction={'column'}
+            align={'center'}
+            justify={'center'}
+          >
+            <Box w={{ base: '80%', md: '25%' }}>
+              <FormLabel>Rol</FormLabel>
+              <Select name="role" value={form.role} onChange={handlerChange}>
+                <option defaultChecked value="practicing">
+                  practicante
+                </option>
+                <option value="assistant">asistente</option>
+                <option value="admin">administrador</option>
+              </Select>
+            </Box>
+          </Flex>
         )}
 
         {errors.length > 0 && (
@@ -244,7 +256,7 @@ export const FormRegister = () => {
           colorScheme="teal"
           variant="outline"
           width="full"
-          mt="3"
+          my={'20px'}
           w={'150px'}
           mx={'auto'}
           type="submit"

@@ -3,7 +3,16 @@ import { verifyUserExistMiddlewares } from '../../../middlewares/verifyUserExist
 import { decodedToken } from '../../../utils/decodedToken'
 import userModels from '../../../models/userModels'
 import { validateId } from '../../../utils/validateId'
+import dbConnect from '../../../libs/dbConnectLibs'
 const handler = async (req, res) => {
+  try {
+    await dbConnect()
+  } catch (error) {
+    return res.status(500).json({
+      msg: '¡Upss! parece que ocurrio un error intentalo más tarde',
+      ok: false
+    })
+  }
   const {
     method,
     query: { numberIdentification }
@@ -25,7 +34,10 @@ const handler = async (req, res) => {
   )
 
   if (!verifyUserExist) {
-    return res.status(400).json({ msg: 'El usuario no existe o el número de identificación es incorrecto', ok: false })
+    return res.status(400).json({
+      msg: 'El usuario no existe o el número de identificación es incorrecto',
+      ok: false
+    })
   }
 
   if (

@@ -4,13 +4,16 @@ export const get = async (queries) => {
   //queries
   const defaultQueries = {
     page: 1,
-    limit: 10
+    limit: 11,
+    sort: 1
   }
+
   queries = mapQueries(defaultQueries, queries)
   try {
     let attendancesPaginate = await attendanceModels.paginate(
       {},
       {
+        sort: { createdAt: queries.sort },
         page: queries.page,
         limit: queries.limit,
         populate: ['user', 'season', 'registered_by']

@@ -7,7 +7,7 @@ const useVerifyRole = (redirectTo) => {
       if (!token) return router.push(redirectTo);
       axios
         .post(
-          "http://localhost:3000/api/dashboard",
+          "/api/dashboard",
           {},
           {
             headers: {

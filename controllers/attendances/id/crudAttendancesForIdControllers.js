@@ -18,7 +18,6 @@ export const crudAttendancesForIdControllers = async (
     const verifyAdminRole = await verifyAdminRoleMiddlewares(tokenId)
     const verifyAssistantRole = await verifyAssistantRoleMiddlewares(tokenId)
     const verifyMatchId = verifyMatchIdMiddlewares(tokenId, userId)
-
     switch (method) {
       case 'GET': {
         if (verifyAdminRole || verifyAssistantRole || verifyMatchId)

@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react'
 import { useGetTokenByLS } from './useGetTokenByLS'
 import axios from 'axios'
 export const useGetAllPractitioners = () => {
+  //STATES
   const [practitioners, setPractitioners] = useState(null)
-  const baseURL = 'http://localhost:3000/api/users'
+  const [error, setError] = useState(null)
+
+  const baseURL = '/api/users'
   const { token } = useGetTokenByLS()
 
   useEffect(() => {
@@ -11,15 +14,13 @@ export const useGetAllPractitioners = () => {
       axios
         .get(baseURL, { headers: { 'x-access-token': token } })
         .then((res) => {
-          console.log(res)
           setPractitioners(res.data.msg.reverse())
         })
         .catch((err) => {
-          console.error(err)
+          setError(err)
         })
     }
   }, [token])
 
-  return { practitioners }
+  return { error, practitioners }
 }
-  

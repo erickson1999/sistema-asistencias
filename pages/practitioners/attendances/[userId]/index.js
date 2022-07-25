@@ -1,8 +1,8 @@
 import React from 'react'
-import { LayoutAdmin } from '../../../layouts/LayoutAdmin'
-import { TableAttendancesAll } from '../../../components/Tables/TableAttendancesAll'
-import { AlertChakra } from '../../../components/Alerts/AlertChakra'
-import { useGetAttendancesById } from '../../../hooks/useGetAttendancesById'
+import { LayoutAdmin } from '../../../../layouts/LayoutAdmin'
+import { TableAttendancesAll } from '../../../../components/Tables/TableAttendancesAll'
+import { AlertChakra } from '../../../../components/Alerts/AlertChakra'
+import { useGetAttendancesById } from '../../../../hooks/useGetAttendancesById'
 const index = ({ userId }) => {
   const { attendances, loading, error } = useGetAttendancesById(userId)
 

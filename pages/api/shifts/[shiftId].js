@@ -1,7 +1,17 @@
 import { validateId } from '../../../utils/validateId'
 import { decodedToken } from '../../../utils/decodedToken'
 import { crudShiftByIdControllers } from '../../../controllers/shifts/id/crudShiftsByIdControllers'
+import dbConnect from '../../../libs/dbConnectLibs'
 const handler = async (req, res) => {
+  try {
+    await dbConnect()
+  } catch (error) {
+    return res.status(500).json({
+      msg: '¡Upss! parece que ocurrio un error intentalo más tarde',
+      ok: false
+    })
+  }
+
   const {
     method,
     query: { shiftId }

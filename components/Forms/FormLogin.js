@@ -7,6 +7,7 @@ import {
   Box,
   Flex
 } from '@chakra-ui/react'
+
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useForm } from '../../hooks/useForm'
@@ -26,7 +27,7 @@ const FormLogin = () => {
 
   function execute(form) {
     axios
-      .post('http://localhost:3000/api/auth/login', form, {
+      .post('api/auth/login', form, {
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json'
@@ -46,7 +47,7 @@ const FormLogin = () => {
   }
   return (
     <Flex align={'center'} justify={'center'} h={'100%'} w={'100%'}>
-      <Box w={'20%'}>
+      <Box w={{ base: '70%', md: '30%', lg: '20%' }}>
         <form onSubmit={handlerSubmit}>
           <FormControl mb={3}>
             <FormLabel htmlFor="n_document" size="2xl">

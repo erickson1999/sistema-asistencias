@@ -4,7 +4,6 @@ export const validationsFormRegisterApi = (req = {}) => {
     last_names,
     password,
     phone,
-    age,
     n_document,
     role,
     origin_institution,
@@ -17,7 +16,6 @@ export const validationsFormRegisterApi = (req = {}) => {
     (!names,
     !last_names,
     !phone,
-    !age,
     !n_document ||
       !password ||
       !shift_name ||

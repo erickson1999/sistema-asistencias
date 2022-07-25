@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react'
 
 export const AlertChakra = ({
-  data = {},
+  data = {title:"", description:"", status:""},
   timeout = false,
   timer = 2000,
   ...props

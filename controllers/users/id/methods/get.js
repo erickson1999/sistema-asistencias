@@ -1,7 +1,6 @@
 import userModels from '../../../../models/userModels'
 export const get = async (userId, queries) => {
   // queries
-  console.log({userId})
   try {
     let user = await userModels
       .findById(userId)

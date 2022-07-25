@@ -2,20 +2,21 @@ import userModels from '../../../../models/userModels'
 import { mapQueries } from '../../../../utils/mapQueries'
 import { findToRegex } from '../../../../utils/findToRegex'
 export const get = async (queries) => {
-  console.log("llego al get")
   try {
     // queries
     const defaultQueries = {
-      limit: 10,
+      limit: 15,
       page: 1,
       names: null,
+      sort: 1,
       last_names: null,
       origin_institution: null,
-      n_document: null,
+      n_document: null
     }
     queries = mapQueries(defaultQueries, queries)
     queries = findToRegex(queries)
     let usersPaginate = await userModels.paginate(queries.find, {
+      sort: { createdAt: queries.sort },
       page: queries.page,
       limit: queries.limit,
       populate: ['season', 'roles']

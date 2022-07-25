@@ -2,19 +2,18 @@ import { crudRegisterControllers } from '../../../../controllers/auth/crudRegist
 import dbConnect from '../../../../libs/dbConnectLibs'
 import { decodedToken } from '../../../../utils/decodedToken'
 const handler = async (req, res) => {
-  const { method } = req
-
   try {
     await dbConnect()
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return res
       .status(500)
       .json({ msg: '¡Upss! parece que ocurrio un error intentalo más tarde' })
   }
+  const { method } = req
   let tokenId = null
   const decodedTokenData = await decodedToken(req)
-  
+
   if (decodedTokenData) {
     tokenId = decodedTokenData.id
   }

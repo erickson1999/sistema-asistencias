@@ -34,31 +34,18 @@ export const useSearcher = (
   const [searchItems, setSearchItems] = useState(null)
 
   const handlerChange = (e) => {
-    console.log({ form })
     setForm({ ...form, [e.target.name]: e.target.value })
   }
 
   const handlerSubmit = (e) => {
     e.preventDefault()
     const validForm = validationsForm(form)
-    // if (validForm) {
-    //   let urlSearch = null
-    //   configs.querys.forEach((query) => {
-    //     if (form[query]) {
-    //       urlSearch = urlSearch
-    //         ? `${urlSearch}&${query}=${form[query]}`
-    //         : `${configs.baseURL}?${query}=${form[query]}`
-    //     }
-    //   })
-    //   axios.get(urlSearch, { headers: configs.headers }).then((res) => {
-    //     console.log({ data: res.data.msg })
-    //   })
-    // }
     let urlWithQuery = `${configs.baseURL}?${form.searchOption}=${form.query}`
     if (validForm) {
       axios
         .get(urlWithQuery, { headers: configs.headers })
         .then((res) => {
+          setError(null)
           setSearchItems(res.data.msg)
         })
         .catch((err) => {
@@ -67,5 +54,12 @@ export const useSearcher = (
     }
   }
 
-  return { error, setSearchItems, searchItems, handlerChange, handlerSubmit }
+  return {
+    error,
+    setError,
+    setSearchItems,
+    searchItems,
+    handlerChange,
+    handlerSubmit
+  }
 }

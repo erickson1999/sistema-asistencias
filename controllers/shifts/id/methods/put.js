@@ -4,7 +4,6 @@ export const put = async (shiftId, req) => {
   //verification data correct
 
   const validData = validationDataShift(req)
-  console.log(validData)
   if (!validData) {
     return {
       status: 400,
@@ -22,10 +21,7 @@ export const put = async (shiftId, req) => {
   }
   const shiftObject = shift.toObject()
   const test = JSON.stringify(shiftObject.shift_start)
-  //   const shift_start = shiftObject.shift_start.toObject()
-  //   const shift_end = shift.shift_end.toObject()
-  console.log(test)
-  //   const shift = await shiftModels.findByIdAndUpdate(shiftId, req.body)
+
 
   return {
     status: 200,

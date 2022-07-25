@@ -17,18 +17,18 @@ export const NavbarAssistant = ({ height, width }) => {
         <Box p="2">
           <NextLink href={'/dashboard'} passHref>
             <Link style={{ textDecoration: 'none' }}>
-              <Heading size="md">Asistencias Practicantes</Heading>
+              <Heading size="md">Asistencias Practicantes v1.0</Heading>
             </Link>
           </NextLink>
         </Box>
         <Spacer />
+        <NextLink href={'/dashboard'}>
+          <Button colorScheme="teal">dashboard</Button>
+        </NextLink>
+        <NextLink href={'/dashboard/profile'} passHref>
+          <Button colorScheme={'teal'}>perfil</Button>
+        </NextLink>
         <ButtonGroup gap="2">
-          <NextLink href={'/practitioners'}>
-            <Button colorScheme="teal">practicantes</Button>
-          </NextLink>
-          <NextLink href={'/login'}>
-            <Button colorScheme="teal">configuraciones</Button>
-          </NextLink>
           <ButtonSignOff></ButtonSignOff>
         </ButtonGroup>
       </Flex>

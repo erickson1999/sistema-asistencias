@@ -12,18 +12,6 @@ import dbConnect from '../../libs/dbConnectLibs'
 
 const SECRET_KEY = process.env.SECRET_KEY
 export const crudRegisterControllers = async (method, tokenId, req) => {
-  try {
-    await dbConnect()
-  } catch (error) {
-    return {
-      status: 500,
-      dataRes: {
-        msg: '¡Upss! parece que ocurrio un error intentalo más tarde',
-        ok: false
-      }
-    }
-  }
-
   let { role, n_document, password, shift_name } = req.body
   if (!validationsFormRegisterApi(req)) {
     return {
@@ -40,7 +28,6 @@ export const crudRegisterControllers = async (method, tokenId, req) => {
   switch (method) {
     case 'POST':
       try {
-        console.log({ role })
         if (role !== 'practicing') {
           if (!verifyAdmin) {
             return {
@@ -79,7 +66,6 @@ export const crudRegisterControllers = async (method, tokenId, req) => {
         const rolesExist = await roleModels.find({
           name: { $in: role }
         })
-        console.log({ rolesExist })
 
         const rolePracticingId = await roleModels.findOne({
           name: 'practicing'

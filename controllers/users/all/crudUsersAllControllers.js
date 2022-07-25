@@ -4,17 +4,6 @@ import { crudRegisterControllers } from '../../auth/crudRegisterControllers'
 import { verifyAdminRoleMiddlewares } from '../../../middlewares/verifyAdminRoleMiddlewares'
 import { verifyAssistantRoleMiddlewares } from '../../../middlewares/verifyAssitantRoleMiddlewares'
 export const crudUsersAllControllers = async (method, tokenId, req) => {
-  try {
-    await dbConnect()
-  } catch (error) {
-    return {
-      status: 500,
-      dataRes: {
-        msg: '¡Upss! parece que ocurrio un error intentalo más tarde',
-        ok: false
-      }
-    }
-  }
   // queries
   const queries = req.query
 

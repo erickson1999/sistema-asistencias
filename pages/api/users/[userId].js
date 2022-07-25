@@ -1,13 +1,23 @@
 import { crudUsersForIdControllers } from '../../../controllers/users/id/crudUsersForIdControllers'
 import { decodedToken } from '../../../utils/decodedToken'
+import dbConnect from '../../../libs/dbConnectLibs'
 const handler = async (req, res) => {
+  try {
+    await dbConnect()
+  } catch (error) {
+    console.error(err)
+    return res.status(500).json({
+      msg: '¡Upss! parece que ocurrio un error intentalo más tarde',
+      ok: false
+    })
+  }
   const {
     query: { userId },
     method
   } = req
   const checkForHexRegExp = /^[0-9a-fA-F]{24}$/
   if (!checkForHexRegExp.test(userId)) {
-    return { status: 400, dataRes: { ok: false, msg: 'El id no es válido' } }
+    return res.status(400).json({ msg: 'el id no es válido', ok: false })
   }
 
   const decodedTokenData = await decodedToken(req)

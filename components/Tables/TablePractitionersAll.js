@@ -7,7 +7,8 @@ import {
   Tr,
   Th,
   Tbody,
-  Td
+  Td,
+  Flex
 } from '@chakra-ui/react'
 import moment from 'moment'
 import { v4 as uuid } from 'uuid'
@@ -25,7 +26,6 @@ export const TablePractitionersAll = ({ practitioners }) => {
     }
     return newPracticing
   })
-  console.log(practitioners)
   practitioners = practitioners.filter((practicing) => {
     if (practicing.status === true) {
       return true
@@ -55,11 +55,20 @@ export const TablePractitionersAll = ({ practitioners }) => {
                 <Td>{practicing.season.season_end}</Td>
                 <Td>20</Td>
                 <Td>
-                  <NextLink  href={`/practitioners/${practicing._id}`}>
-                    <a>
-                      <BsListCheck size={'20px'} />
-                    </a>
-                  </NextLink>
+                  <Flex gap={"10px"}>
+                    <NextLink
+                      href={`/practitioners/attendances/${practicing._id}`}
+                    >
+                      <a>
+                        <BsListCheck size={'20px'} />
+                      </a>
+                    </NextLink>
+                    <NextLink href={`/practitioners/profile/${practicing._id}`}>
+                      <a>
+                        <BsEye size={'20px'} />
+                      </a>
+                    </NextLink>
+                  </Flex>
                 </Td>
               </Tr>
             ))}

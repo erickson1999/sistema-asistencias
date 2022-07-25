@@ -5,12 +5,22 @@ const styles = {
     fontSize: '13px'
   }
 }
-
 Font.register({
   family: 'Roboto',
   src: 'https://fonts.gstatic.com/s/roboto/v30/KFOiCnqEu92Fr1Mu51QrEz0dL_nz.woff2'
 })
-export const LicensePracticing = () => {
+export const LicensePracticing = ({ userData }) => {
+  console.log({ idCarnet: userData._id })
+  const truncateFullName = (names, lastNames) => {
+    names = names.split(' ')
+    lastNames = lastNames.split(' ')
+    return `${names[0]} ${lastNames[0]} ${lastNames[1]}`
+  }
+  const truncateNames = (names, limit = 1) => {
+    names = names.split(' ')
+    return `${names[0]}${names[1] ? ` ${names[1]}` : ''}`
+  }
+
   return (
     <Document>
       <Page size="A4">
@@ -49,22 +59,23 @@ export const LicensePracticing = () => {
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
-                  width: '65%',
+                  width: '60%',
                   justifyContent: 'center'
                 }}
               >
                 <Text style={{ fontSize: '9px' }}>Nombre completo:</Text>
-
                 <View style={{ paddingLeft: '1px' }}>
-                  <Text style={styles.Text}>Erickson Raul</Text>
+                  <Text style={styles.Text}>
+                    {truncateNames(userData.names)}
+                  </Text>
                 </View>
                 <View style={{ marginBottom: '5px', paddingLeft: '1px' }}>
-                  <Text style={styles.Text}>Quispe Churata</Text>
+                  <Text style={styles.Text}>{userData.last_names}</Text>
                 </View>
 
                 <Text style={{ fontSize: '9px' }}>Nº de documento:</Text>
                 <View style={{ marginBottom: '5px', paddingLeft: '1px' }}>
-                  <Text style={styles.Text}>70521769</Text>
+                  <Text style={styles.Text}>{userData.n_document}</Text>
                 </View>
 
                 <Text style={{ fontSize: '9px' }}>Área:</Text>
@@ -76,20 +87,13 @@ export const LicensePracticing = () => {
               <View
                 style={{
                   height: '100%',
-                  width: '35%',
+                  width: '40%',
                   display: 'flex',
                   justifyContent: 'center',
                   alignItems: 'center'
                 }}
               >
-                <Image
-                  style={{
-                    height: '80px',
-                    width: '80px'
-                  }}
-                  src="/qrcode-temp/qrcode.png"
-                  alt="qrcode"
-                ></Image>
+                <Text style={{ fontSize: '10px' }}>foto</Text>
               </View>
             </View>
           </View>
@@ -104,6 +108,63 @@ export const LicensePracticing = () => {
             }}
           >
             <Text style={styles.Text}>Practicante</Text>
+          </View>
+        </View>
+        <View
+          style={{
+            marginTop: '5px',
+            width: '8.5cm',
+            height: '5.5cm',
+            border: '2px solid #000',
+            marginHorizontal: 'auto',
+            padding: '1px',
+            borderRadius: '2px'
+          }}
+        >
+          <View
+            style={{
+              height: '12%',
+              backgroundColor: '#00F5B4',
+              display: 'flex',
+              justifyContent: 'center',
+              textAlign: 'center'
+            }}
+          >
+            <Text style={{ fontSize: '13px', fontWeight: 'bold' }}>
+              Municipalidad Provincial de San Román
+            </Text>
+          </View>
+          <View
+            style={{
+              height: '76%',
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Image
+              style={{
+                height: '120px',
+                width: '110px'
+              }}
+              src={`http://localhost:3000/api/files/images/qr-license/${userData._id}`}
+              alt="qrcode"
+            ></Image>
+          </View>
+          <View
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '12%',
+              backgroundColor: '#00F5B4',
+              textAlign: 'center'
+            }}
+          >
+            <Text style={{ fontSize: '14px' }}>
+              {truncateFullName(userData.names, userData.last_names)}
+            </Text>
           </View>
         </View>
       </Page>

@@ -10,7 +10,6 @@ export const crudShiftByIdControllers = async (
   req
 ) => {
   try {
-    await dbConnect()
 
     //middlewares
     const verifyAdminRole = await verifyAdminRoleMiddlewares(tokenId)

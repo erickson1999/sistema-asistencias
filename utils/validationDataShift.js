@@ -1,7 +1,6 @@
 export const validationDataShift = (req) => {
   const { body } = req
   if (!body) {
-    console.log(1)
     return false
   }
   const { shift_start, shift_end } = body
@@ -32,7 +31,6 @@ export const validationDataShift = (req) => {
       }
     }
     for (const key in shift_end) {
-      console.log(4)
       if (key === 'hour') {
         if (isNaN(shift_end[key])) {
           return false

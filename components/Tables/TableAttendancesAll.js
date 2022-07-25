@@ -13,7 +13,7 @@ import {
 } from '@chakra-ui/react'
 import moment from 'moment'
 import { v4 as uuid } from 'uuid'
-
+import NextLink from 'next/link'
 export const TableAttendancesAll = ({ attendances, from }) => {
   const fullNameUser = `${attendances[0].user.names} ${attendances[0].user.last_names}`
   let temprano = 0
@@ -67,12 +67,21 @@ export const TableAttendancesAll = ({ attendances, from }) => {
       {from === 'dashboard' ? (
         <></>
       ) : (
-        <Text fontSize="2xl">{fullNameUser}</Text>
+        <Flex justify={"center"}>
+          <Text fontSize="2xl">{fullNameUser}</Text>
+        </Flex>
       )}
       {from === 'dashboard' ? (
         <></>
       ) : (
-        <Flex w={'50%'} mx={'auto'} justify={'space-between'}>
+        <Flex
+          w={{ base: '50%', md: '40%' }}
+          mx={'auto'}
+          direction={{ base: 'column', md: 'row' }}
+          gap={'10px'}
+          justify={'space-around'}
+          textAlign={'center'}
+        >
           <Text
             fontSize={'xl'}
             backgroundColor="green.200"
@@ -107,7 +116,7 @@ export const TableAttendancesAll = ({ attendances, from }) => {
           </Text>
         </Flex>
       )}
-    <Divider my={"10px"}></Divider>
+      <Divider my={'10px'}></Divider>
       <TableContainer w="100%">
         <Table variant="striped" colorScheme="gray" overflowY={'scroll'}>
           <Thead>
@@ -120,39 +129,41 @@ export const TableAttendancesAll = ({ attendances, from }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {attendances.map((attendance, index) => {
+            {attendances.map((attendance) => {
               return (
-                index <= 9 && (
-                  <Tr key={uuid()}>
-                    {from === 'dashboard' ? (
-                      <Td>
-                        {`${attendance.user.names} ${attendance.user.last_names}`}
-                      </Td>
-                    ) : (
-                      <></>
-                    )}
-                    <Td>{attendance.updatedAt}</Td>
+                <Tr key={uuid()}>
+                  {from === 'dashboard' ? (
                     <Td>
-                      {attendance.registered_by
-                        ? `${attendance.registered_by.names} ${attendance.registered_by.last_names}`
-                        : '--'}
+                      <NextLink
+                        href={`/practitioners/attendances/${attendance.user._id}`}
+                      >
+                        <a>{`${attendance.user.names} ${attendance.user.last_names}`}</a>
+                      </NextLink>
                     </Td>
-                    <Td>{attendance.type_attendance}</Td>
-                    <Td
-                      textColor={
-                        attendance.status_attendance == 'Temprano'
-                          ? 'green.500'
-                          : attendance.status_attendance == 'Tarde'
-                          ? 'orange.500'
-                          : attendance.status_attendance == 'Falta'
-                          ? 'red.500'
-                          : 'gray.600'
-                      }
-                    >
-                      {attendance.status_attendance}
-                    </Td>
-                  </Tr>
-                )
+                  ) : (
+                    <></>
+                  )}
+                  <Td>{attendance.updatedAt}</Td>
+                  <Td>
+                    {attendance.registered_by
+                      ? `${attendance.registered_by.names} ${attendance.registered_by.last_names}`
+                      : '--'}
+                  </Td>
+                  <Td>{attendance.type_attendance}</Td>
+                  <Td
+                    textColor={
+                      attendance.status_attendance == 'Temprano'
+                        ? 'green.500'
+                        : attendance.status_attendance == 'Tarde'
+                        ? 'orange.500'
+                        : attendance.status_attendance == 'Falta'
+                        ? 'red.500'
+                        : 'gray.600'
+                    }
+                  >
+                    {attendance.status_attendance}
+                  </Td>
+                </Tr>
               )
             })}
           </Tbody>

@@ -3,7 +3,6 @@ import { verifyAdminRoleMiddlewares } from '../../../middlewares/verifyAdminRole
 import { get } from './methods/get'
 export const crudShiftsAllControllers = async (method, tokenId) => {
   try {
-    await dbConnect()
     //middelwares
     const verifyAdminRole = await verifyAdminRoleMiddlewares(tokenId)
 

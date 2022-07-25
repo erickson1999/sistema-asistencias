@@ -29,10 +29,6 @@ const handler = async (req, res) => {
         }
 
         const userObject = user.toObject()
-
-        delete userObject.password
-        delete userObject.roles[0]._id
-        delete userObject.season[0]._id
         res.status(200).json({ msg: userObject, ok: true })
       }
     } catch (error) {

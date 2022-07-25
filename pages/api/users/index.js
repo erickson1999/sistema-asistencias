@@ -1,7 +1,18 @@
 import { crudUsersAllControllers } from '../../../controllers/users/all/crudUsersAllControllers'
 import { decodedToken } from '../../../utils/decodedToken'
-
+import dbConnect from '../../../libs/dbConnectLibs'
 const handler = async (req, res) => {
+  try {
+    await dbConnect()
+  } catch (error) {
+    return {
+      status: 500,
+      dataRes: {
+        msg: '¡Upss! parece que ocurrio un error intentalo más tarde',
+        ok: false
+      }
+    }
+  }
   const { method } = req
 
   const decodedTokenData = await decodedToken(req)
