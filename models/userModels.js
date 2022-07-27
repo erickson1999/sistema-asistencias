@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import roleModels from './roleModels'
 import seasonModels from './seasonModels'
 import mongoosePaginate from 'mongoose-paginate-v2'
+import QRCode from 'qrcode'
 const UserSchema = new Schema(
   {
     names: {
@@ -24,7 +25,7 @@ const UserSchema = new Schema(
     },
     date_birth: {
       type: Date,
-      required: [true, 'El campo fecha de nacimiento es obligatorio'],
+      required: [true, 'El campo fecha de nacimiento es obligatorio']
     },
     n_document: {
       type: Number,
@@ -66,6 +67,28 @@ UserSchema.static('encryptPassword', async (password) => {
 
 UserSchema.static('comparePasswords', async (password, receivedPassword) => {
   return await bcrypt.compare(password, receivedPassword)
+})
+
+UserSchema.static('createQrCode', async (path, userId) => {
+  try {
+    if (!path) {
+      console.error('No se envió el path para crear el qr code')
+      return false
+    }
+    if (!userId) {
+      console.error('No se envió el userId para crear el qr code')
+      return false
+    }
+    QRCode.toFile(`${path}${userId}.png`, userId, {
+      color: {
+        dark: '#000',
+        light: '#fff'
+      }
+    })
+    return true
+  } catch (error) {
+    return false
+  }
 })
 
 export default mongoose.models.User || mongoose.model('User', UserSchema)

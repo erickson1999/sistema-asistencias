@@ -18,7 +18,7 @@ export default function handler(req, res) {
       .status(400)
       .json({ msg: `El id ${userId} no es válido`, ok: false })
   }
-  const filePath = path.resolve('.', `assets/qrcode-temp/${userId}.png`)
+  const filePath = path.resolve('.', `assets/qrcode-users/${userId}.png`)
   let imageBuffer
   try {
     imageBuffer = fs.readFileSync(filePath)

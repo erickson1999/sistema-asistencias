@@ -148,7 +148,7 @@ export const LicensePracticing = ({ userData }) => {
                 height: '120px',
                 width: '110px'
               }}
-              src={`http://localhost:3000/api/files/images/qr-license/${userData._id}`}
+              src={`/api/files/images/qr-license/${userData._id}`}
               alt="qrcode"
             ></Image>
           </View>

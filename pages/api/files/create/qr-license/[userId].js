@@ -14,7 +14,7 @@ const handler = async (req, res) => {
   }
   try {
     QRCode.toFile(
-      `assets/qrcode-temp/${userId}.png`,
+      `assets/qrcode-users/${userId}.png`,
       userId,
       {
         color: {

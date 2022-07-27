@@ -138,7 +138,16 @@ export const crudRegisterControllers = async (method, tokenId, req) => {
         const token = jwt.sign({ id: newUser._id }, SECRET_KEY, {
           expiresIn: defaultConfig().tokenExpiration
         })
+        //create qr code
+        const qrCode = await userModels.createQrCode(
+          'assets/qrcode-users/',
+          newUser._id.toString()
+        )
 
+        if (qrCode) {
+          console.log('qr gereado con exito')
+        }
+        
         return { status: 200, dataRes: { token, ok: true } }
       } catch (error) {
         switch (error.code) {

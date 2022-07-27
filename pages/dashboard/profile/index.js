@@ -11,16 +11,16 @@ import axios from 'axios'
 const index = () => {
   const { loading, error, user } = useGetUserByToken()
   const { role } = useProtectedRouteByToken()
-  useEffect(() => {
-    if (user) {
-      axios
-        .post(`/api/files/create/qr-license/${user._id}`)
-        .then((res) => {
-          console.log({ res })
-        })
-        .catch((err) => {})
-    }
-  }, [user])
+  // useEffect(() => {
+  //   if (user) {
+  //     axios
+  //       .post(`/api/files/create/qr-license/${user._id}`)
+  //       .then((res) => {
+  //         console.log({ res })
+  //       })
+  //       .catch((err) => {})
+  //   }
+  // }, [user])
 
   return loading ? (
     <Flex w={'full'}>
