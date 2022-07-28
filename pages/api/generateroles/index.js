@@ -1,6 +1,7 @@
 import { defaultConfig } from '../../../defaultConfig'
 import dbConnect from '../../../libs/dbConnectLibs'
 import shiftModels from '../../../models/shiftModels'
+import roleModels from '../../../models/roleModels'
 const handler = async (req, res) => {
   try {
     await dbConnect()
@@ -9,12 +10,11 @@ const handler = async (req, res) => {
 
     if (method === 'POST') {
       if (password === defaultConfig().passwordGenRoles) {
-        // const resGenDefaultRoles = await roleModels.insertMany(
-        //   defaultConfig().defaultRoles.map((name) => ({
-        //     name,
-        //   }))
-        // );
-
+        await roleModels.insertMany(
+          defaultConfig().defaultRoles.map((name) => ({
+            name
+          }))
+        )
         const shifts = await shiftModels.insertMany([
           {
             name: 'morning',
